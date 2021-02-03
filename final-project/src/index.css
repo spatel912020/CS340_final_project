@@ -12,14 +12,29 @@ code {
     monospace;
 }
 
+@keyframes text-shadow-change {
+  from {
+    text-shadow: 3px 3px red;
+  }
+  to {
+    text-shadow: 3px 3px blue;
+  }
+}
+
 .title {
   text-align: center;
   color: white;
-  text-shadow: 2px 2px red;
+  text-shadow: 3px 3px red;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-weight: bold;
   font-style: italic;
   background-color: transparent;
+}
+
+.title h1 {
+  animation-name: text-shadow-change;
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
 }
 
 .user_account ul {
