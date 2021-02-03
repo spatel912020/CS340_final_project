@@ -8,10 +8,18 @@ ReactDOM.render(
   <div>
     <div className="title">
       <h1>Song Merge Sort</h1>
-      <ul>
-        <li><a class="active" href="#login">Login</a></li>
-        <li><a href="#Creat account">Create</a></li>
-      </ul>
+      <div className= "user_account">
+        <ul>
+          <li><a class="active" href="#login">Login</a></li>
+          <li><a href="#Creat account">Create</a></li>
+        </ul>
+      </div>
+      <div className= "mode_switch">
+        <ul>
+          <li><a class="active" href="#Spotify">Spotify</a></li>
+          <li><a href="#Youtube">Youtube</a></li>
+        </ul>
+      </div>
     </div>
     <SongSort/>
   </div>,

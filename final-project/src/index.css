@@ -22,17 +22,17 @@ code {
   background-color: transparent;
 }
 
-ul {
+.user_account ul {
   list-style-type: none;
   padding: 0;
   overflow: hidden;
 }
 
-li {
+.user_account li {
   float: right;
 }
 
-li a {
+.user_account li a {
   display: block;
   color: white;
   text-align: center;
@@ -40,6 +40,40 @@ li a {
   text-decoration: none;
 }
 
-li a:hover {
+.user_account li a:hover {
   background-color: rgb(31, 124, 54);
+}
+
+ul.mode_switch {
+  list-style-type: none;
+  overflow: hidden;
+}
+
+.mode_switch {
+  display: table;
+  margin: 0 auto;
+}
+
+.mode_switch li {
+  background-color: rgb(15, 24, 13);
+  padding: 10px;
+  margin: 0 auto;
+  float: left;
+  display: inline;
+}
+
+.mode_switch li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.mode_switch li a[href*='Spotify']:hover {
+  background-color: rgb(31, 124, 54);
+}
+
+.mode_switch li a[href*='Youtube']:hover {
+  background-color: rgb(184, 32, 57);
 }
