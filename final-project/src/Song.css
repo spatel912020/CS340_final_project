@@ -1,3 +1,7 @@
+body {
+  background-color: rgb(36, 59, 39);
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -37,5 +41,39 @@
 .right_song > h3,
 .left_song > h1,
 .left_song > h3 {
-  color: rgb(3, 29, 64);
+  color: rgb(2, 12, 56);
+}
+
+ul.mode_switch {
+  list-style-type: none;
+  overflow: hidden;
+}
+
+.mode_switch {
+  display: table;
+  margin: 0 auto;
+}
+
+.mode_switch li {
+  background-color: rgb(15, 24, 13);
+  padding: 10px;
+  margin: 0 auto;
+  float: left;
+  display: inline;
+}
+
+.mode_switch li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.mode_switch li a[id='Spotify']:hover {
+  background-color: rgb(31, 124, 54);
+}
+
+.mode_switch li a[id='Youtube']:hover {
+  background-color: rgb(184, 32, 57);
 }

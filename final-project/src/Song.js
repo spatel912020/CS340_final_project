@@ -1,3 +1,4 @@
+import React, { Component } from 'react';
 import './Song.css'
 
 const song_list = {
@@ -8,25 +9,57 @@ const song_list = {
     ]
   }
 
-function SongSort(props) {
-  return (
-    <div className="grid-container">
-      <button className="song_button">
-        <div className="left_song">
-          <img className= "left_song_img" src={song_list.songs[0].img_src} alt={song_list.songs[0].name} />
-          <h1>{song_list.songs[0].name}</h1>
-          <h3>{song_list.songs[0].artist}</h3>
+class SongSort extends Component {
+  state = {
+    isSpotify: true
+  };
+  toggleToYoutube = () => {
+    document.body.style.setProperty('background-color', 'rgb(82, 29, 29)');
+    document.getElementsByClassName('left_song')[0].getElementsByTagName('h1')[0].style.setProperty('color', 'black');
+    document.getElementsByClassName('left_song')[0].getElementsByTagName('h3')[0].style.setProperty('color', 'black');
+    document.getElementsByClassName('right_song')[0].getElementsByTagName('h1')[0].style.setProperty('color', 'black');
+    document.getElementsByClassName('right_song')[0].getElementsByTagName('h3')[0].style.setProperty('color', 'black');
+    this.setState({isSpotify: false})
+    return false
+  }
+  toggleToSpotify = () => {
+    document.body.style.setProperty('background-color', 'rgb(36, 59, 39)');
+    document.getElementsByClassName('left_song')[0].getElementsByTagName('h1')[0].style.setProperty('color', 'color: rgb(2, 12, 56);');
+    document.getElementsByClassName('left_song')[0].getElementsByTagName('h3')[0].style.setProperty('color', 'color: rgb(2, 12, 56);');
+    document.getElementsByClassName('right_song')[0].getElementsByTagName('h1')[0].style.setProperty('color', 'color: rgb(2, 12, 56);');
+    document.getElementsByClassName('right_song')[0].getElementsByTagName('h3')[0].style.setProperty('color', 'color: rgb(2, 12, 56);');
+    this.setState({isSpotify: true})
+    return false
+  }
+
+  render(){
+    return (
+      <div>
+        <div className= "mode_switch">
+          <ul>
+            <li><a onClick={this.toggleToSpotify} id="Spotify" href="#">Spotify</a></li>
+            <li><a onClick={this.toggleToYoutube} id="Youtube" href="#">Youtube</a></li>
+          </ul>
         </div>
-      </button>
-      <button className="song_button">
-        <div className="right_song">
-          <img className= "right_song_img" src={song_list.songs[1].img_src} alt={song_list.songs[1].name}/>
-          <h1>{song_list.songs[1].name}</h1>
-          <h3>{song_list.songs[1].artist}</h3>
+        <div className="grid-container">
+          <button className="song_button">
+            <div className="left_song">
+              <img className= "left_song_img" src={song_list.songs[0].img_src} alt={song_list.songs[0].name} />
+              <h1>{song_list.songs[0].name}</h1>
+              <h3>{song_list.songs[0].artist}</h3>
+            </div>
+          </button>
+          <button className="song_button">
+            <div className="right_song">
+              <img className= "right_song_img" src={song_list.songs[1].img_src} alt={song_list.songs[1].name}/>
+              <h1>{song_list.songs[1].name}</h1>
+              <h3>{song_list.songs[1].artist}</h3>
+            </div>
+          </button>
         </div>
-      </button>
-    </div>
-  );
-}
+      </div>
+    );
+  }
+};
 
 export default SongSort;
