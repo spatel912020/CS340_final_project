@@ -1,6 +1,7 @@
 import './Header.css'
 
 const Header = (props) => {
+  const loginLink = <a href="https://www.google.com">log in</a>;
   return (
     <div>
       <div className="title">
@@ -12,11 +13,13 @@ const Header = (props) => {
           </ul>
         </div>
       </div>
-      <div className= "mode_switch">
-        <ul>
-          <li><button id="Spotify">Spotify</button></li>
-          <li><button id="Youtube">Youtube</button></li>
-        </ul>
+      <div className= "Message">
+          <p>
+            Song merge sort is a utility to help you create more personalized Spotify playlists.
+          </p>
+          <p>
+            Click the song you perfer below to get started, or {loginLink} for a more personal experience!
+          </p>
       </div>
     </div>
   );

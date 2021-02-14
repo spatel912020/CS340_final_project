@@ -51,39 +51,9 @@
   background-color: rgb(31, 124, 54);
 }
 
-ul.mode_switch {
-  list-style-type: none;
-  overflow: hidden;
-}
-
-.mode_switch {
-  display: table;
-  margin: 0 auto;
-}
-
-.mode_switch li {
-  background-color: rgb(15, 24, 13);
-  padding: 10px;
-  margin: 0 auto;
-  float: left;
-  display: inline;
-}
-
-.mode_switch li button {
-  color: white;
+.Message {
   text-align: center;
-  padding: 14px 16px;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-weight: bold;
-  font-size: 1rem;
-  border: none;
-  background-color: transparent;
-}
-
-.mode_switch li button[id='Spotify']:hover {
-  background-color: rgb(31, 124, 54);
-}
-
-.mode_switch li button[id='Youtube']:hover {
-  background-color: rgb(184, 32, 57);
+  font-size: 1.5rem;
 }
