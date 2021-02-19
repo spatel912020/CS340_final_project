@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -10,10 +9,13 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import './LoginDialog.css'
+import './Navbar.js'
 
- // const emails = ['username@gmail.com', 'user02@gmail.com'];
 
-export default function LoginDialog() {
+import { Link } from 'react-router-dom';
+
+export default function LoginDialog(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -30,8 +32,8 @@ export default function LoginDialog() {
   };
 
   const handleLogin = () => {
-    alert("They tried to Login!");
     setOpen(false);
+    props.setUserPage(true);
   };
 
   return (
@@ -41,7 +43,16 @@ export default function LoginDialog() {
         <AccountBoxIcon />
       </ListItem>
 
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <Dialog 
+        open={open} 
+        onClose={handleClose} 
+        aria-labelledby="form-dialog-title"
+        PaperProps={{
+          style: {
+            backgroundColor: 'white',
+          },
+        }}
+        >
         <DialogTitle id="form-dialog-title">Login or Sign Up</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -63,17 +74,29 @@ export default function LoginDialog() {
             label="Password"
             type="password"
             required="true"
+            color="black"
             fullWidth
           />
         </DialogContent>
         <DialogActions>
-        <Button onClick={handleLogin} color="primary">
+        <Button
+          component={Link}
+          to="/user"
+          onClick={handleLogin}
+          color="black"
+        >
             Login
           </Button>
-          <Button onClick={handleSignUp} color="primary">
+          <Button
+            onClick={handleSignUp}
+            color="black"
+          >
             Sign Up
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button
+            onClick={handleClose}
+            color="black"
+          >
             Cancel
           </Button>
         </DialogActions>

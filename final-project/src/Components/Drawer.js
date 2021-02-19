@@ -23,7 +23,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DeleteIcon from '@material-ui/icons/Delete';
-import LoginDialog from './Popup';
+import LoginDialog from './LoginDialog';
 
 const drawerWidth = 240;
 
