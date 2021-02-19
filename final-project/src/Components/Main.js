@@ -1,6 +1,6 @@
-import './Header.css'
+import './Main.css'
 
-const Header = (props) => {
+const Main = (props) => {
   return (
     <div>
         <div className="main_content_header">
@@ -11,4 +11,4 @@ const Header = (props) => {
   );
 };
 
-export default Header;
+export default Main;
