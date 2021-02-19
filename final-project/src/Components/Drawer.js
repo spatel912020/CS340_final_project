@@ -15,6 +15,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import AddIcon from '@material-ui/icons/Add';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import InfoIcon from '@material-ui/icons/Info';
@@ -23,7 +24,6 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DeleteIcon from '@material-ui/icons/Delete';
-import LoginDialog from './LoginDialog';
 
 const drawerWidth = 240;
 
@@ -149,11 +149,12 @@ export default function PersistentDrawerLeft() {
         </div>
         <Divider />
         <List>
-          <ListItem button key={"Create Playlist"}>
-            <ListItemText primary={"Create Playlist"} />
-            <AddIcon />
-          </ListItem>
-          <LoginDialog />
+          {['Create', 'Login'].map((text, index) => (
+            <ListItem button key={text}>
+              <ListItemIcon>{index % 2 === 0 ? <AddIcon /> : <AccountBoxIcon />}</ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
         </List>
         <Divider />
         <Divider />
