@@ -38,7 +38,12 @@ export default function LoginDialog(props) {
 
   return (
     <div>
-      <ListItem button key={"Create Playlist"} onClick={handleClickOpen}>
+      <ListItem 
+        button 
+        key={"Login of Create Account"} 
+        onClick={handleClickOpen}
+        style={{color: "black"}}
+        >
         <ListItemText primary={"Login or Create Account"} />
         <AccountBoxIcon />
       </ListItem>

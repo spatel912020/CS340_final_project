@@ -1,12 +1,17 @@
 .main_content_user {
-  text-align: center;
-  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 .main_content_user .title {
   font-weight: bold;
   font-style: italic;
-  background-color: transparent;
-  text-shadow: 3px 3px black;
+  color: white;
+  text-shadow: 3px 3px white;
+}
+
+.main_content_user .saved_playlists {
+
 }

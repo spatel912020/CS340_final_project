@@ -25,17 +25,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     textDecoration: "none",
     padding: "20px",
-    color: "white",
-    "&:hover": {
-      transition: "background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-      backgroundColor: '#222326',
-      color: '#1db954',
-    },
-  },
-  youtube: {
-    textDecoration: "none",
-    padding: "20px",
-    color: "white",
+    color: "black",
     "&:hover": {
       transition: "background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
       backgroundColor: '#222326',
@@ -81,8 +71,7 @@ export default function Navbar() {
       <div className={classes.root}>
           <AppBar position="static" className={classes.bar}>
           <Toolbar>
-            <Typography component={Link} to="/spotify" variant="h6" className={classes.title}>Spotify Sort</Typography>
-            <Typography component={Link} to="/youtube" variant="h6" className={classes.youtube}>Youtube Sort</Typography>
+            <Typography component={Link} to="/" variant="h6" className={classes.title}>Merge Song Sort</Typography>
             <div className={classes.flexGrow}></div>
             <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleAccountClick} aria-label="account"><PersonIcon /></IconButton>
             <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleMenuClose}>
