@@ -1,5 +1,5 @@
 import './User.css'
-import SavedPlaylistsDialog from './SavedPlaylistsDialog.js'
+import SavedPlaylistsAccordion from './SavedPlaylistsAccordion.js'
 import NewPlaylistDialog from './NewPlaylistDialog.js'
 
 const User = (props) => {
@@ -10,8 +10,10 @@ const User = (props) => {
           <div className="saved_playlists">
             <NewPlaylistDialog>
             </NewPlaylistDialog>
-            <SavedPlaylistsDialog>
-            </SavedPlaylistsDialog>
+            <SavedPlaylistsAccordion>
+            </SavedPlaylistsAccordion>
+            <SavedPlaylistsAccordion>
+            </SavedPlaylistsAccordion>
           </div>
         </div>
     </div>

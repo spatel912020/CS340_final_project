@@ -42,7 +42,7 @@ export default function SavedPlaylistsDialog() {
         color="primary" 
         onClick={handleClickOpen}
         style={{minWidth: "15%", 
-                margin: "5px",
+                margin: "auto",
                 color: "#222326",
                 backgroundColor: "#1db954",
               }}
