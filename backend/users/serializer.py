@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import *
 
 
-class ReactSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = React_Login
+        model = User
         fields = ['username', 'password']
