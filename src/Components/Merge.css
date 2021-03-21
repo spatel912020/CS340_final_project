@@ -1,11 +1,10 @@
 .grid-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 15%;
+  gap: 10%;
   margin-left: 5%;
   margin-right: 5%;
   margin-top: 5%;
-  margin-bottom: 5%;
 }
 
 .left_song {
@@ -37,5 +36,5 @@
 .right_song > h3,
 .left_song > h1,
 .left_song > h3 {
-  color: rgb(3, 29, 64);
+  color: rgb(2, 12, 56);
 }
