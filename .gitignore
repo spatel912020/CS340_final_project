@@ -1,0 +1,3 @@
+./mergeenv
+./backend/_pycache_/*
+./backend/migrations/*

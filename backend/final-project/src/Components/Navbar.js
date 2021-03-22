@@ -8,7 +8,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Link } from 'react-router-dom';
-import './Navbar.css'
 import LoginDialog from "./LoginDialog"
 
 const useStyles = makeStyles((theme) => ({
@@ -16,8 +15,8 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   bar: {
-    backgroundColor: '#1db954',
-    color: "#ffffff",
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.secondary.main,
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -25,11 +24,11 @@ const useStyles = makeStyles((theme) => ({
   title: {
     textDecoration: "none",
     padding: "20px",
-    color: "black",
+    color: theme.palette.secondary.main,
     "&:hover": {
       transition: "background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-      backgroundColor: '#222326',
-      color: '#1db954',
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.primary.main,
     },
   },
   flexGrow:{

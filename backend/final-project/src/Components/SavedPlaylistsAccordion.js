@@ -7,17 +7,17 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
-import { theme } from '../theme';
+import { dark } from '../theme';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((dark) => ({
   root: {
     width: '50%',
     margin: "auto",
     backgroundColor: "#222326",
   },
   heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
+    fontSize: dark.typography.pxToRem(15),
+    fontWeight: dark.typography.fontWeightRegular,
     marginTop: "auto",
     marginBottom: "auto",
   },
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
   edit_button: {
     flex: "left",
-    color: theme.palette.primary,
+    color: dark.palette.primary.main,
   },
 }));
 
@@ -50,7 +50,7 @@ export default function SimpleAccordion() {
           aria-label="Edit"
           onClick={(event) => event.stopPropagation()}
           onFocus={(event) => event.stopPropagation()}
-          color={theme.palette.primary}
+          color={dark.palette.primary.main}
           control={
             <Button 
               variant="contained"
