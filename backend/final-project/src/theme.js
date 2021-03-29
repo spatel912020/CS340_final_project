@@ -10,7 +10,7 @@ export const dark = createMuiTheme({
       main: "#222326",
     },
     text: {
-      main: "white",
+      main: "#ffffff",
     }
   }
 })
@@ -21,7 +21,7 @@ export const light = createMuiTheme({
       main: "#1db954",
     },
     secondary: {
-      main: "white",
+      main: "#ffffff",
     },
     text: {
       main: "#222326",

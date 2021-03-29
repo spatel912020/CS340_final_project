@@ -74,7 +74,7 @@ export default function Navbar() {
             <div className={classes.flexGrow}></div>
             <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleAccountClick} aria-label="account"><PersonIcon /></IconButton>
             <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleMenuClose}>
-              <MenuItem component={Link} to="/account" onClick={handleMenuClose}>My account</MenuItem>
+              <MenuItem component={Link} to="/user" onClick={handleMenuClose}>My account</MenuItem>
               <MenuItem component={Link} to="/" onClick={handleAccountLogout}>Logout</MenuItem>
             </Menu>
           </Toolbar>

@@ -1,48 +1,96 @@
-import requests
 from django.shortcuts import render, redirect
-from credentials import REDIRECT_URI, CLIENT_SECRET, CLIENT_ID, USER_ID
+from .credentials import REDIRECT_URI, CLIENT_SECRET, CLIENT_ID
+from rest_framework.views import APIView
+from requests import Request, post
 from rest_framework import status
+from rest_framework.response import Response
+from .util import *
 
 
-class Spotify:
-    def __init__(self):
-        self.client_secret = CLIENT_SECRET
-        self.token = ""
-        self.user_id = USER_ID
-        self.client_it = CLIENT_ID
-        self.redirect = REDIRECT_URI
-        self.headers = {}
+class AuthURL(APIView):
+    def get(self, request, fornat=None):
+        scopes = 'user-read-playback-state user-modify-playback-state user-read-currently-playing'
 
-    def get_spotify_token(self):
-        AUTH_URL = 'https://accounts.spotify.com/api/token'
-        # POST
-        auth_response = requests.post(AUTH_URL, {
-            'grant_type': 'client_credentials',
-            'client_id': CLIENT_ID,
-            'client_secret': CLIENT_SECRET,
-        })
-        # convert the response to JSON
-        auth_response_data = auth_response.json()
-        # save the access token
-        access_token = auth_response_data['access_token']
-        self.token = access_token
+        url = Request('GET', 'https://accounts.spotify.com/authorize', params={
+            'scope': scopes,
+            'response_type': 'code',
+            'redirect_uri': REDIRECT_URI,
+            'client_id': CLIENT_ID
+        }).prepare().url
 
-    def fetch_user_playlist(self):
-        self.get_spotify_token()
-        self.headers = {
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {self.token}"}
-        url = f"https://api.spotify.com/v1/users/{self.user_id}/playlists?offset=0&limit=50"
-        response = requests.get(url, headers=self.headers)
-        print(response.status_code)
-        res = response.json()
-        for items in res['items']:
-            print("Playlist name = " + items['name'] + ", ID = ", items['id'])
-        return res
-
-    def list_songs_in_playlist(self):
-        pass
+        return Response({'url': url}, status=status.HTTP_200_OK)
 
 
-test = Spotify()
-test.fetch_user_playlist()
+def spotify_callback(request, format=None):
+    code = request.GET.get('code')
+    error = request.GET.get('error')
+
+    response = post('https://accounts.spotify.com/api/token', data={
+        'grant_type': 'authorization_code',
+        'code': code,
+        'redirect_uri': REDIRECT_URI,
+        'client_id': CLIENT_ID,
+        'client_secret': CLIENT_SECRET
+    }).json()
+
+    access_token = response.get('access_token')
+    token_type = response.get('token_type')
+    refresh_token = response.get('refresh_token')
+    expires_in = response.get('expires_in')
+    error = response.get('error')
+
+    if not request.session.exists(request.session.session_key):
+        request.session.create()
+
+    update_or_create_user_tokens(
+        request.session.session_key, access_token, token_type, expires_in, refresh_token)
+
+    return redirect('http://localhost:3000/user')
+
+
+class IsAuthenticated(APIView):
+    def get(self, request, format=None):
+        is_authenticated = is_spotify_authenticated(
+            self.request.session.session_key)
+        return Response({'status': is_authenticated}, status=status.HTTP_200_OK)
+
+
+class GetPlaylists(APIView):
+    def get(self, request, format=None):
+        # Send request to Spotify for user's playlists.
+        host = self.request.session.session_key
+        endpoint = "playlists"
+        response = execute_user_spotify_api_request(host, endpoint)
+
+        # Return 204 if error.
+        if 'error' in response or 'items' not in response:
+            return Response({}, status=status.HTTP_204_NO_CONTENT)
+
+        # Get list of playlists.
+        items = response.get('items')
+
+        # Return 204 if user has no playlists.
+        if not items:
+            return Response({}, status=status.HTTP_204_NO_CONTENT)
+
+        # Collect playlist information into a list.
+        playlists = []
+        for item in items:
+            playlist = {
+                'playlist_id': item.get('id'),
+                'name': item.get('name'),
+                'tracks_total': item.get('tracks').get('total'),
+            }
+            playlists.append(playlist)
+
+        return Response(playlists, status=status.HTTP_200_OK)
+
+
+class GetPlaylistInfo(APIView):
+    def get(self, request, playlist_id, format=None):
+        playlist_info = get_playlist_info(self, playlist_id)
+
+        if playlist_info is None:
+            return Response({}, status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response(playlist_info, status=status.HTTP_200_OK)

@@ -33,7 +33,7 @@ const useStyles = makeStyles((dark) => ({
   },
 }));
 
-export default function SimpleAccordion() {
+export default function SimpleAccordion(props) {
   const classes = useStyles();
 
   return (
@@ -82,7 +82,7 @@ export default function SimpleAccordion() {
             </Button>
           }
           />
-          <Typography className={classes.heading}>Saved Playlist Name</Typography>
+          <Typography className={classes.heading}>{props.playlistName}</Typography>
         </AccordionSummary>
         <AccordionDetails>
         </AccordionDetails>

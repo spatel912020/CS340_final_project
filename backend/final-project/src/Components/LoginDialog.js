@@ -72,7 +72,7 @@ export default function LoginDialog(props) {
         aria-labelledby="form-dialog-title"
         PaperProps={{
           style: {
-            backgroundColor: 'white',
+            backgroundColor: '#ffffff',
           },
         }}
         >
