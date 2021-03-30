@@ -127,7 +127,7 @@ export default function NewPlaylistDialog(props) {
                   <Checkbox
                     edge="start"
                     tabIndex={-1}
-                    //checked = {props.playlist.includes(playlist.name)}
+                    checked = {props.playlist.includes(playlist)}
                     disableRipple
                     inputProps={{ 'aria-labelledby': labelId }}
                     onClick = {() => {addPossiblePlaylist(playlist);}}
