@@ -19,10 +19,13 @@ export default function LoginDialog(props) {
   const [open, setOpen] = React.useState(false);
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [playlist, setPlaylist] = React.useState([]);
+
   let history = useHistory();
   const user = {
     username: username,
     password: password,
+    playlist: playlist
   }
   const handleClickOpen = () => {
     setOpen(true);
@@ -36,7 +39,12 @@ export default function LoginDialog(props) {
     axios.post('http://127.0.0.1:8000/login/', user)
     setOpen(false);
     props.setUserPage(true);
-    history.push('/user')
+    //history.push('/user')
+      history.push({
+        pathname: '/user',
+        state: { username: user.username, password: user.password, playlist: user.playlist}
+      });
+
   };
 
   const handleLogin = () => {
@@ -46,10 +54,18 @@ export default function LoginDialog(props) {
     if(result.length === 0){
       alert("Username or Password incorrect. Try Again or Sign Up");
     }else{
-      console.log("Here")
       setOpen(false);
+      setPlaylist(result[0].playlist)
+      setPlaylist(true)
       props.setUserPage(true);
-      history.push('/user')
+      user.playlist = result[0].playlist
+
+      console.log(user.playlist)
+      console.log(playlist)
+      history.push({
+        pathname: '/user',
+        state: { username: user.username, password: user.password, playlist: user.playlist}
+      });
     }
   });
   };

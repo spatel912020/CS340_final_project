@@ -1,0 +1,10 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "${workspaceFolder:CS340_final_project}/backend/db.sqlite3",
+            "name": "1"
+        }
+    ]
+}

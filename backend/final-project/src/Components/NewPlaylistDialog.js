@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,13 +9,18 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import axios from 'axios';
+
+//Needed to make a post request to backend -- DO NOT REMOVE
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+axios.defaults.xsrfCookieName = "csrftoken";
 
 export default function NewPlaylistDialog(props) {
   const [open, setOpen] = useState(false);
   const [displayModal, setModalDisplay] = useState(false);
   const [spotifyAuthenticated, setSpotifyAuthenticated] = useState(false);
   const [spotifyPlaylist, setSpotifyPlaylist] = useState([]);
-  var [possibleImportPlaylist, setPossibleImportPlaylist] = useState([]);
+  const [possibleImportPlaylist, setPossibleImportPlaylist] = useState([]);
 
   const authenticateSpotify = () => {
     fetch("http://127.0.0.1:8000/spotify/is-authenticated")
@@ -55,30 +60,33 @@ export default function NewPlaylistDialog(props) {
       });
   };
 
-  const checkAuthentication = () => {
-    fetch("/spotify/is-authenticated")
-      .then((response) => response.json())
-      .then((data) => {
-        setSpotifyAuthenticated(data.status);
-        console.log(data.status);
-      });
-  };
 
   const importPlaylist = () =>{
-    props.setPlaylistNames(possibleImportPlaylist);
+    var user = {
+      username: props.username,
+      password: props.password,
+      playlist: []
+    }
+    possibleImportPlaylist.forEach((playlist) => {
+      user.playlist.push(playlist)
+    });
+    axios.post('http://127.0.0.1:8000/login/', user).then(()=> {
+      props.setPlaylist(user.playlist);
+    });
   }
 
-  const addPossiblePlaylist = (name) => {
+  const addPossiblePlaylist = (playlist) => {
     var tempPlaylist = possibleImportPlaylist
-    if(tempPlaylist.includes(name)){
-      tempPlaylist.splice(tempPlaylist.indexOf(name), 1);
+    if(tempPlaylist.includes(playlist)){
+      tempPlaylist.splice(tempPlaylist.indexOf(playlist), 1);
     }
     else{
-      tempPlaylist.push(name);
+      tempPlaylist.push(playlist);
     }
-    setPossibleImportPlaylist(tempPlaylist)
+    console.log(tempPlaylist)
+    setPossibleImportPlaylist(tempPlaylist);
   }
-
+  
   const handleClickOpen = () => {
     setOpen(true);
     setModalDisplay(true);
@@ -88,6 +96,7 @@ export default function NewPlaylistDialog(props) {
     setOpen(false);
     setModalDisplay(false);
   };
+
   if(!displayModal){
     return (
       <div>
@@ -118,10 +127,10 @@ export default function NewPlaylistDialog(props) {
                   <Checkbox
                     edge="start"
                     tabIndex={-1}
-                    checked = {props.playlist.includes(playlist.name)}
+                    //checked = {props.playlist.includes(playlist.name)}
                     disableRipple
                     inputProps={{ 'aria-labelledby': labelId }}
-                    onClick = {() => {addPossiblePlaylist(playlist.name);}}
+                    onClick = {() => {addPossiblePlaylist(playlist);}}
                   />
                 </ListItemIcon>
                 <ListItemText id={labelId} primary={`${playlist.name}`} />

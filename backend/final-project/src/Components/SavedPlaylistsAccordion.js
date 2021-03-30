@@ -82,9 +82,11 @@ export default function SimpleAccordion(props) {
             </Button>
           }
           />
-          <Typography className={classes.heading}>{props.playlistName}</Typography>
+          <Typography className={classes.heading}>{props.playlist.name}</Typography>
+          {console.log(props.playlist.name)}
         </AccordionSummary>
         <AccordionDetails>
+          <Typography>Number of tracks = {props.playlist.tracks_total}</Typography>
         </AccordionDetails>
       </Accordion>
     </div>
